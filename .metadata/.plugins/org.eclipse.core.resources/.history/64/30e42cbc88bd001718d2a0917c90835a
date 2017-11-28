@@ -1,0 +1,461 @@
+package mirimstore;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.*;
+
+import org.omg.Messaging.SyncScopeHelper;
+	
+class RecomFrame extends JFrame implements ActionListener {
+	protected JButton  menub, choob, boarb, cartb, snackb, breab, drinkb, icecb, candb, etccb,left, right,상황1, 상황2, 상황3, 상황4, 상황5, 상황6;
+	protected JLabel label, result, page, 메뉴추천, 상황메뉴, 우선순위, back;
+	private Font f1;
+	CardLayout card = new CardLayout();
+	Container cc = this.getContentPane();
+	Situation a = new Situation();
+	RandomMenu r = new RandomMenu();
+	public RecomFrame()
+	  {
+		super("mirimmajum");
+	    cc.setBackground(Color.WHITE);
+	    menub = new JButton(new ImageIcon("img/m-01.png"));
+		   choob = new JButton(new ImageIcon("img/m-04.png"));
+		   boarb = new JButton(new ImageIcon("img/m-05.png"));
+		   cartb = new JButton(new ImageIcon("img/m-07.png"));
+		   snackb = new JButton(new ImageIcon("img/menu-01.png"));
+		   breab = new JButton(new ImageIcon("img/menu-02.png"));
+		   drinkb = new JButton(new ImageIcon("img/menu-04.png"));
+		   icecb = new JButton(new ImageIcon("img/menu-05.png"));
+		   candb = new JButton(new ImageIcon("img/menu-03.png"));
+	   left = new JButton(new ImageIcon("left.jpg"));
+	   page = new JLabel(new ImageIcon("page.jpg"));
+	   right = new JButton(new ImageIcon("right.jpg"));
+	   메뉴추천 = new JLabel(new ImageIcon("미림매점-06.png"));
+	   상황메뉴 = new JLabel(new ImageIcon("미림매점-13.png"));
+	   상황1 = new JButton(new ImageIcon("img/v-01.png"));
+	   상황2 = new JButton(new ImageIcon("img/v-02.png"));
+	   상황3 = new JButton(new ImageIcon("img/v-03.png"));
+	   상황4 = new JButton(new ImageIcon("img/v-04.png"));
+	   상황5 = new JButton(new ImageIcon("img/v-05.png"));
+	   상황6 = new JButton(new ImageIcon("img/v-06.png"));
+	   우선순위 = new JLabel(new ImageIcon("img/v-07.png"));
+	   back = new JLabel(new ImageIcon("img/88-01.png"));
+	   snackb.addActionListener(this);
+	   breab.addActionListener(this);
+	   drinkb.addActionListener(this);
+	   icecb.addActionListener(this);
+	   candb.addActionListener(this);
+	   상황1.addActionListener(this);
+	   상황2.addActionListener(this);
+	   상황3.addActionListener(this);
+	   상황4.addActionListener(this);
+	   상황5.addActionListener(this);
+	   
+	   
+	 
+	   menub.setBackground(Color.WHITE);
+	   choob.setBackground(Color.WHITE);
+	   boarb.setBackground(Color.WHITE);
+	   cartb.setBackground(Color.WHITE);
+	   snackb.setBackground(Color.WHITE);
+	   breab.setBackground(Color.WHITE);
+	   drinkb.setBackground(Color.WHITE);
+	   icecb.setBackground(Color.WHITE);
+	   candb.setBackground(Color.WHITE);
+	   상황1.setBackground(Color.WHITE);
+	   상황2.setBackground(Color.WHITE);
+	   상황3.setBackground(Color.WHITE);
+	   상황4.setBackground(Color.WHITE);
+	   상황5.setBackground(Color.WHITE);
+	   상황6.setBackground(Color.WHITE);
+	   
+	
+	   menub.setBorderPainted(false);
+	   choob.setBorderPainted(false);
+	   boarb.setBorderPainted(false);
+	   cartb.setBorderPainted(false);
+	   snackb.setBorderPainted(false);
+	   breab.setBorderPainted(false);
+	   drinkb.setBorderPainted(false);
+	   icecb.setBorderPainted(false);
+	   candb.setBorderPainted(false);
+	   상황1.setBorderPainted(false);
+	   상황2.setBorderPainted(false);
+	   상황3.setBorderPainted(false);
+	   상황4.setBorderPainted(false);
+	   상황5.setBorderPainted(false);
+	   상황6.setBorderPainted(false);
+	   
+	   menub.addActionListener(this); choob.addActionListener(this); boarb.addActionListener(this); 
+	   cartb.addActionListener(this); 
+	   result = new JLabel();
+       result.setText("Country Name");
+       
+	   setLayout(null);
+	   cc.add(menub); cc.add(choob); cc.add(boarb); cc.add(cartb);
+	   cc.add(메뉴추천);cc.add(snackb);cc.add(breab); cc.add(drinkb); cc.add(icecb); cc.add(candb); 
+	    cc.add(상황메뉴); cc.add(상황1); cc.add(상황2); cc.add(상황3); cc.add(상황4); cc.add(상황5); cc.add(상황6); 
+	   cc.add(우선순위);
+	  
+	   snackb.setBorderPainted(false);
+	   snackb.setOpaque(false);
+	   snackb.setContentAreaFilled(false);
+	   breab.setBorderPainted(false);
+	   breab.setOpaque(false);
+	   breab.setContentAreaFilled(false);
+	   drinkb.setBorderPainted(false);
+	   drinkb.setOpaque(false);
+	   drinkb.setContentAreaFilled(false);
+	   icecb.setBorderPainted(false);
+	   icecb.setOpaque(false);
+	   icecb.setContentAreaFilled(false);
+	   candb.setBorderPainted(false);
+	   candb.setOpaque(false);
+	   candb.setContentAreaFilled(false);
+	   
+	   상황1.setBorderPainted(false);
+	   상황1.setOpaque(false);
+	   상황1.setContentAreaFilled(false);
+	   상황2.setBorderPainted(false);
+	   상황2.setOpaque(false);
+	   상황2.setContentAreaFilled(false);
+	   상황3.setBorderPainted(false);
+	   상황3.setOpaque(false);
+	   상황3.setContentAreaFilled(false);
+	   상황4.setBorderPainted(false);
+	   상황4.setOpaque(false);
+	   상황4.setContentAreaFilled(false);
+	   상황5.setBorderPainted(false);
+	   상황5.setOpaque(false);
+	   상황5.setContentAreaFilled(false);
+	   상황6.setBorderPainted(false);
+	   상황6.setOpaque(false);
+	   상황6.setContentAreaFilled(false);
+	   
+	   setDefaultCloseOperation(EXIT_ON_CLOSE); // 프로그램 종료 
+	   setSize(1140, 880);
+	    right.setBounds(710, 720, 40, 40);
+		page.setBounds(640, 714, 50, 50);
+		left.setBounds(580, 720, 40, 40);
+		menub.setBounds(60, 60, 215, 80);
+		   choob.setBounds(320, 62, 209, 69);
+		   boarb.setBounds(580, 60, 209, 69);
+		   cartb.setBounds(840, 60, 209, 69);
+		
+		메뉴추천.setBounds(100, 230, 211, 50);
+		snackb.setBounds(105, 310,209, 69);
+		breab.setBounds(105, 390, 209, 69);
+		drinkb.setBounds(105, 470,209, 69);
+		icecb.setBounds(105, 550, 209, 69);
+		candb.setBounds(105, 630, 209, 69);
+		상황메뉴.setBounds(465, 215, 220, 50);
+		상황1.setBounds(427, 282, 290, 60);
+		상황2.setBounds(427, 352, 290, 60);
+		상황3.setBounds(427, 422, 290, 60);
+		상황4.setBounds(427, 492, 290, 60);
+		상황5.setBounds(427, 562, 290, 60);
+		상황6.setBounds(427, 632, 290, 60);
+		우선순위.setBounds(750, 200, 400, 531);
+	
+		setVisible(true);
+		setResizable(false);
+		getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(45, 200, 320, 518);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBounds(410, 200, 320, 518);
+		getContentPane().add(panel_1);
+		
+		JLabel panel_2 = new JLabel(new ImageIcon("img/88-01.png"));
+		panel_2.setLayout(null);
+		panel_2.setBounds(730, 200, 401, 530);
+		getContentPane().add(panel_2);
+		
+		f1 = new Font("나눔고딕", Font.PLAIN, 30);
+		try {
+			Connection con = null;
+            
+			
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+            java.sql.Statement st = null;
+            ResultSet result = null;
+            st = con.createStatement();
+            st.execute("use menu;"); // 사용할 DB를 선택한다.
+            // executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+            result = st.executeQuery("select * from allmenu group by name order by product desc limit 3;");
+            
+            // 결과를 하나씩 출력한다.
+            while (result.next()){
+                String str = result.getNString(1);
+                System.out.println(str);
+                
+                JLabel jj = new JLabel(str);
+                jj.setFont(f1);
+                panel_2.add(jj);
+                jj.setBounds(125, 250, 200, 50);
+                
+            }
+			//JOptionPane.showMessageDialog(this, ms.printprice(1));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		setSize(1140, 880);
+		setVisible(true);
+		setResizable(false);
+	  }
+	public String randomtext(){
+		String[] text = {"두근 두근! 뭐가 나올까?","메뉴 고르느라 힘들었지?","뭐가 나오든 맛있게 먹자~!","걱정하지마, 기회는 많으니깐!","맛있는거 먹고 힘내~"}; 
+		Random ran = new Random(); 
+		int i = ran.nextInt(5);
+		return text[i];
+	}
+	//a.RandomChoiceSituation();
+		public void actionPerformed(ActionEvent e){
+			if(e.getSource().equals(menub)){
+				try{
+					dispose();
+					MenuFrameA menu = new MenuFrameA();
+					menu.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(choob)){
+				try{
+					dispose();
+					RecomFrame re = new RecomFrame();
+					re.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(boarb)){
+				try{
+					dispose();
+					BoardFrame boa = new BoardFrame();
+					boa.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			
+			if(e.getSource().equals(cartb)){
+				try{
+					dispose();
+					CartFrame car = new CartFrame();
+					car.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(snackb)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, r.randomchoice(1));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(breab)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, r.randomchoice(2));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(drinkb)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, r.randomchoice(3));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(icecb)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, r.randomchoice(4));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(candb)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, r.randomchoice(5));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(상황1)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(1));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(상황2)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(2));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(상황3)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(3));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}if(e.getSource().equals(상황4)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(4));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}if(e.getSource().equals(상황5)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(5));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}if(e.getSource().equals(상황6)){
+				try{
+					JOptionPane.showMessageDialog(this, randomtext());
+					Thread.sleep(1000);
+					JOptionPane.showMessageDialog(this, a.RandomChoiceSituation(6));
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			
+	}
+}
+class RandomMenu extends Frame implements ActionListener{
+	int sel;
+	ArrayList pricearr= new ArrayList();
+	String text = "", recent="";
+	public void choice(int message){
+		Random ran = new Random(); 
+		switch(message){
+		case 1 : 
+		 sel = ran.nextInt(41)+1;
+		 break;
+		case 2 : 
+		 sel = ran.nextInt(50)+42;
+		 break;
+		case 3 : 
+			 sel = ran.nextInt(116)+87;
+			 break;
+		case 4 : 
+			 sel = ran.nextInt(70)+51;
+			 break;
+		case 5 : 
+			 sel = ran.nextInt(81)+71;
+			 break;
+		}
+	}
+	public String randomchoice(int n) throws Exception{
+		String fname = "menu2.txt";
+		FileReader file = new FileReader(fname);
+		BufferedReader reader = new BufferedReader(file);
+		choice(n);
+		String line = null, recent=null;
+		while((line = reader.readLine())!= null){
+			String[] pepleline = line.split("\t");
+			int num = Integer.parseInt(pepleline[0]);
+			String name = pepleline[1];
+			if(num == sel){recent=name; continue;}
+			int price = Integer.parseInt(pepleline[2]);
+		}
+		return recent;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+
+class Situation{
+	int sel;
+	ArrayList pricearr= new ArrayList();
+	public void choice(int message){
+		Random ran = new Random(); 
+		switch(message){
+		case 1 : 
+		 sel = ran.nextInt(11)+1;
+		 break;
+		case 2 : 
+		 sel = ran.nextInt(24)+12;
+		 break;
+		case 3 : 
+			 sel = ran.nextInt(37)+25;
+			 break;
+		case 4 : 
+			 sel = ran.nextInt(73)+38;
+			 break;
+		case 5 : 
+			 sel = ran.nextInt(88)+74;
+			 break;
+		case 6 : 
+			 sel = ran.nextInt(117)+89;
+			 break;
+		default: 
+			break;
+		}
+	}
+	
+	public String RandomChoiceSituation(int n) throws Exception{
+		String fname = "randommenu.txt";
+		FileReader file = new FileReader(fname);
+		BufferedReader reader = new BufferedReader(file);
+		String text = "";
+		String line = null, recent=null;
+		choice(n);
+		while((line = reader.readLine())!= null){
+			String[] pepleline = line.split("\t");
+			int num = Integer.parseInt(pepleline[0]);
+			String name = pepleline[1];
+			if(num == sel){recent=name; continue;}
+			int price = Integer.parseInt(pepleline[2]);
+		}
+		return recent;		
+	}
+}
+public class Recommend{
+	public static void main(String args[]) throws Exception{
+		new RecomFrame();
+	}
+
+}

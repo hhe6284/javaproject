@@ -1,0 +1,118 @@
+package mirimstore;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+
+public class Board2 extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JButton button;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Board2 frame = new Board2();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Board2() {
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 418, 321);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		textField = new JTextField("글 제목");
+		contentPane.add(textField, BorderLayout.NORTH);
+		textField.setColumns(10);
+		
+		JTextArea textArea = new JTextArea("글 내용");
+		contentPane.add(textArea, BorderLayout.CENTER);
+		
+		button = new JButton("글 저장");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent a) {if(textField.getText()==null||textArea.getText()==null){
+	         	try{
+	         		JOptionPane.showMessageDialog(null, "모든 값을 입력하세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+	         	}catch(Exception e3){
+	         		e3.getMessage();
+	         	}
+	         }
+			try{
+				   Connection con = null;
+			       con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+			      
+			       ResultSet result = null;
+			      // ResultSet result2 = null;
+			       java.sql.Statement st = null;
+			       st = con.createStatement();
+			       st.execute("use menu;"); // 사용할 DB를 선택한다.
+			       // executeQuery : 쿼리를 실행하고 결과를 ResultSet 객체로 반환한다.
+			       result = st.executeQuery("select * from login where id = (select max(id) from login);");
+			       //result.close();
+			     //  result2 = st.executeQuery("select * from board;");
+			       
+			       // 결과를 하나씩 출력한다.
+			       while (result.next()){
+			    	   java.sql.Statement st2 = null;
+		                 //ResultSet result = null;
+		                
+		                 st2 = con.createStatement();
+		                 st2.execute("use menu;"); // 사용할 DB를 선택한다.
+		                 st2.execute("insert into board values(null,'"+result.getString(2)+"','"+
+		                 result.getString(3)+"','"+result.getString(4)+"','"+textField.getText()+
+		                 "','"+textArea.getText()+"')"); // 사용할 DB를 선택한다.
+			          
+			       }
+				   }catch(Exception e){e.printStackTrace();}
+	        
+	        
+	     while(!(textField.getText()==null||textArea.getText()==null)){
+					if(a.getSource().equals(button)){
+						try{
+			                dispose();
+							BoardFrame menu = new BoardFrame();
+		   					menu.setVisible(true);
+		   					break;
+						}catch(Exception eee){
+							eee.printStackTrace();
+						};
+		   			}
+				}	
+	        
+	   
+	
+		}
+	});
+	contentPane.add(button, BorderLayout.SOUTH);
+}
+
+public void actionPerformed(ActionEvent a) {
+	
+}
+}

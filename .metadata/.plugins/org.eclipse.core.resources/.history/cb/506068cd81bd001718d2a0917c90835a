@@ -1,0 +1,514 @@
+package mirimstore;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
+class MenuFrameB extends JFrame implements ActionListener {
+	public JButton  menub, choob, boarb, cartb, snackb, breab_c, drinkb, icecb, candb, etccb, 내일
+	,만두,스트로, 빅페스, 치즈, 달콤초코, 미니초코, 핫, right;
+	protected JLabel label, result, page;
+	GridBagConstraints cc;
+	private Font f1 = new Font("나눔고딕", Font.PLAIN, 20);
+	public MenuFrameB()
+	  {
+		super("미림매점");
+		Container c = this.getContentPane();
+	    c.setBackground(Color.WHITE);
+	     
+	    menub = new JButton(new ImageIcon("img/m-02.png"));
+		   choob = new JButton(new ImageIcon("img/m-03.png"));
+		   boarb = new JButton(new ImageIcon("img/m-05.png"));
+		   cartb = new JButton(new ImageIcon("img/m-07.png"));
+	   
+	   snackb = new JButton(new ImageIcon("img/menu-01.png"));
+	   breab_c = new JButton(new ImageIcon("img/store-02.png"));
+	   drinkb = new JButton(new ImageIcon("img/menu-04.png"));
+	   icecb = new JButton(new ImageIcon("img/menu-05.png"));
+	   candb = new JButton(new ImageIcon("img/menu-03.png"));
+	   etccb = new JButton(new ImageIcon("img/menu-06.png"));
+	   
+	   내일 = new JButton(new ImageIcon("img/b-01.png"));
+	   만두 = new JButton(new ImageIcon("img/b-04.png"));
+	   스트로 = new JButton(new ImageIcon("img/b-05.png"));
+	   빅페스 = new JButton(new ImageIcon("img/b-06.png"));
+	   치즈 = new JButton(new ImageIcon("img/b-07.png"));
+	   달콤초코 = new JButton(new ImageIcon("img/b-08.png"));
+	   미니초코 = new JButton(new ImageIcon("img/b-09.png"));
+	   핫 = new JButton(new ImageIcon("img/b-10.png"));
+		   page = new JLabel("1/2");
+		   page.setFont(f1);
+	   right = new JButton(new ImageIcon("img/a-49.png"));
+	   //이벤트 등록
+	   내일.addActionListener(this);
+	   만두.addActionListener(this);
+	   스트로.addActionListener(this);
+	   빅페스.addActionListener(this);
+	   치즈.addActionListener(this);
+	   달콤초코.addActionListener(this);
+	   미니초코.addActionListener(this);
+	   핫.addActionListener(this);
+	   right.addActionListener(this);
+	   menub.setBackground(Color.WHITE);
+	   choob.setBackground(Color.WHITE);
+	   boarb.setBackground(Color.WHITE);
+	   cartb.setBackground(Color.WHITE);
+	   snackb.setBackground(Color.WHITE);
+	   breab_c.setBackground(Color.WHITE);
+	   drinkb.setBackground(Color.WHITE);
+	   icecb.setBackground(Color.WHITE);
+	   candb.setBackground(Color.WHITE);
+	   etccb.setBackground(Color.WHITE);
+	
+	   right.setBackground(Color.WHITE);
+	   
+	   menub.setBorderPainted(false);
+	   choob.setBorderPainted(false);
+	   boarb.setBorderPainted(false);
+	   cartb.setBorderPainted(false);
+	   snackb.setBorderPainted(false);
+	   breab_c.setBorderPainted(false);
+	   drinkb.setBorderPainted(false);
+	   icecb.setBorderPainted(false);
+	   candb.setBorderPainted(false);
+	   etccb.setBorderPainted(false);
+	
+	   right.setBorderPainted(false);
+	   
+	   menub.setPreferredSize(new Dimension(200, 70));
+	   choob.setPreferredSize(new Dimension(200, 70));
+	   boarb.setPreferredSize(new Dimension(200, 70));
+	   cartb.setPreferredSize(new Dimension(200, 70));
+	   snackb.setPreferredSize(new Dimension(200, 70));
+	   breab_c.setPreferredSize(new Dimension(200, 70));
+	   drinkb.setPreferredSize(new Dimension(200, 70));
+	   icecb.setPreferredSize(new Dimension(200,70));
+	   candb.setPreferredSize(new Dimension(200,70));
+	   etccb.setPreferredSize(new Dimension(200,70));
+	   
+	   내일.setBorderPainted(false);
+	   내일.setOpaque(false);
+	   내일.setContentAreaFilled(false);
+	   만두.setBorderPainted(false);
+	   만두.setOpaque(false);
+	   만두.setContentAreaFilled(false);
+	   스트로.setBorderPainted(false);
+	   스트로.setOpaque(false);
+	   스트로.setContentAreaFilled(false);
+	   빅페스.setBorderPainted(false);
+	   빅페스.setOpaque(false);
+	   빅페스.setContentAreaFilled(false);
+	   치즈.setBorderPainted(false);
+	   치즈.setOpaque(false);
+	   치즈.setContentAreaFilled(false);
+	   달콤초코.setBorderPainted(false);
+	   달콤초코.setOpaque(false);
+	   달콤초코.setContentAreaFilled(false);
+	   미니초코.setBorderPainted(false);
+	   미니초코.setOpaque(false);
+	   미니초코.setContentAreaFilled(false);
+	   핫.setBorderPainted(false);
+	   핫.setOpaque(false);
+	   핫.setContentAreaFilled(false);
+	 
+	   right.setBorderPainted(false);
+	   right.setOpaque(false);
+	   right.setContentAreaFilled(false);
+	   menub.addActionListener(this); choob.addActionListener(this); boarb.addActionListener(this); 
+	   cartb.addActionListener(this); snackb.addActionListener(this); breab_c.addActionListener(this);
+	   drinkb.addActionListener(this); icecb.addActionListener(this); candb.addActionListener(this);
+	   etccb.addActionListener(this); right.addActionListener(this); 
+	   result = new JLabel();
+       result.setText("Country Name");
+       
+	   setLayout(null);
+	   
+	   menub.setBounds(60, 60, 215, 80);
+	   choob.setBounds(320, 62, 209, 69);
+	   boarb.setBounds(580, 60, 209, 69);
+	   cartb.setBounds(840, 60, 209, 69);
+	   snackb.setBounds(50, 200, 200, 70);
+	   breab_c.setBounds(50, 300, 200, 70);
+	   drinkb.setBounds(50, 400, 200,70);
+	   icecb.setBounds(50, 500, 200, 70);
+	   candb.setBounds(50, 600, 200, 70);
+	   etccb.setBounds(50, 700, 200, 70);
+	  
+	   내일.setBounds(310, 200,  170, 220);
+	   만두.setBounds(510, 200,  170, 220);
+	   스트로.setBounds(710, 200,  170, 220);
+	   빅페스.setBounds(910, 200,  170, 220);
+	   치즈.setBounds(310, 470,  170, 220);
+	   달콤초코.setBounds(510, 470,  170, 220);
+	   미니초코.setBounds(710, 470,  170, 220);
+	   핫.setBounds(910, 470,  170, 220);
+	 
+	   page.setBounds(640, 714, 50, 50);
+	   right.setBounds(710, 720, 40, 40);
+	    c.add(menub); c.add(choob); c.add(boarb); c.add(cartb);
+	   c.add(snackb); c.add(breab_c); c.add(drinkb); c.add(icecb); c.add(candb); 
+	   c.add(etccb); 
+	   
+	   c.add(내일); c.add(만두); c.add(스트로); c.add(빅페스);
+	   c.add(치즈); c.add(달콤초코); c.add(미니초코); c.add(핫); 
+	   c.add(page); c.add(right);
+	   
+	   setDefaultCloseOperation(EXIT_ON_CLOSE); // 프로그램 종료 
+	   setSize(1140, 880);
+	   setVisible(true);
+	   setResizable(false);
+	  }
+	
+		public void actionPerformed(ActionEvent e){
+			 //확인버튼 누르면 프레임이 닫히고 
+			if(e.getSource().equals(menub)){
+				try{
+					dispose();
+					MenuFrameA menu = new MenuFrameA();
+					menu.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(choob)){
+				try{
+					dispose();
+					RecomFrame re = new RecomFrame();
+					re.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(boarb)){
+				try{
+					dispose();
+					BoardFrame boa = new BoardFrame();
+					boa.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			
+			if(e.getSource().equals(cartb)){
+				try{
+					dispose();
+					CartFrame car = new CartFrame();
+					car.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(snackb)){
+				try{
+					dispose();
+					MenuFrameA ma = new MenuFrameA();
+					ma.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(breab_c)){
+				try{
+					dispose();
+					MenuFrameB mb = new MenuFrameB();
+					mb.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(drinkb)){
+				try{
+					dispose();
+					MenuFrameC mc = new MenuFrameC();
+					mc.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(icecb)){
+				try{
+					dispose();
+					MenuFrameD md = new MenuFrameD();
+					md.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(candb)){
+				try{
+					dispose();
+					MenuFrameE me = new MenuFrameE();
+					me.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(etccb)){
+				try{
+					dispose();
+					MenuFrameF mf = new MenuFrameF();
+					mf.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+			if(e.getSource().equals(right)){
+				try{
+					dispose();
+					MenuFrameB2 me = new MenuFrameB2();
+					me.setVisible(true);
+				}catch(Exception ee){
+					ee.printStackTrace();
+				}
+			}
+		if (e.getSource().equals(내일))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '내일도치즈';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='내일도치즈';");
+                    	st2.execute("insert into cart values('내일도치즈','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(만두))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '만두';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='치킨맛라면스낵';");
+                    	st2.execute("insert into cart values('만두','1500')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(스트로))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '스트로베리베니쉬';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='스트로베리베니쉬';");
+                    	st2.execute("insert into cart values('스트로베리베니쉬','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(빅페스))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '빅패스츄리';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='빅패스츄리';");
+                    	st2.execute("insert into cart values('빅패스츄리','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(치즈))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '치즈후레쉬팡';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='치즈후레쉬팡';");
+                    	st2.execute("insert into cart values('치즈후레쉬팡','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(달콤초코))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '달콤초코데니쉬';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='달콤초코데니쉬';");
+                    	st2.execute("insert into cart values('달콤초코데니쉬','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}	
+		else if(e.getSource().equals(미니초코))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '가나슈';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='가나슈';");
+                    	st2.execute("insert into cart values('가나슈','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		else if(e.getSource().equals(핫))
+		{
+			try {
+				Connection con = null;
+                
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/menu?useSSL=false", "root", "mirim");
+                java.sql.Statement st = null;
+                ResultSet result = null;
+                st = con.createStatement();
+                st.execute("use menu;"); 
+                result = st.executeQuery("select name from allmenu where name = '핫소시지치아바타';");
+                
+                while (result.next()){
+                    String str = result.getNString(1) + "상품을 주문하시겠습니까?";
+                   int reply = JOptionPane.showConfirmDialog(this, str);
+                    if(reply == JOptionPane.YES_OPTION){
+                    	 java.sql.Statement st2 = null;
+                         st2 = con.createStatement();
+                    	st2.execute("update allmenu set product=product+1 where name='핫소시지치아바타';");
+                    	st2.execute("insert into cart values('핫소시지치아바타','1000')");
+                    }
+                }
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+}
+public class MenuB{
+	public static void main(String args[]) throws Exception{
+		new MenuFrameB();
+		
+	}
+
+}
